@@ -11,6 +11,7 @@ import sklearn.neighbors
 import sklearn.mixture
 import sklearn.metrics
 import kneed
+import math
 import plotting
 
 
@@ -141,11 +142,11 @@ def dbscan_clustering(data, name,
 
     # Implement DBSCAN model with distance choose using DMDBSCAN algorithm
     dbscan_model = \
-        sklearn.cluster.DBSCAN(min_samples=2,
-                               eps=dmdbscan_algorithm(learning_data,
-                                                      "clustering/" +
-                                                      name + "/DBSCAN"),
-                               n_jobs=-1).fit(learning_data)
+        sklearn.cluster.DBSCAN(
+            min_samples=round(math.log(len(learning_data.index))),
+            eps=dmdbscan_algorithm(learning_data,
+                                   "clustering/" + name + "/DBSCAN"),
+            n_jobs=-1).fit(learning_data)
 
     # Plot clusters over auxiliary data
     if auxiliary_data is not None:
@@ -192,7 +193,9 @@ def optics_clustering(data, name,
 
     # Implement OPTICS model
     optics_model = \
-        sklearn.cluster.OPTICS(min_samples=2, n_jobs=-1).fit(learning_data)
+        sklearn.cluster.OPTICS(
+            min_samples=round(math.log(len(learning_data.index))),
+            n_jobs=-1).fit(learning_data)
     # Extract OPTICS clusters using DBSCAN algorithm with distance choosing
     # as DMDBSCAN algorithm
     labels = sklearn.cluster.cluster_optics_dbscan(
