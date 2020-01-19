@@ -92,14 +92,15 @@ def initial_data_clustering(data_for_clustering, data_for_lda, customer_ids,
             4. category_names - numpy array (82, ) with names of categories
     """
     # Clustering using DBSCAN algorithm
-    print("\t0. DBSCAN clustering")
+    print("\t0. DBSCAN clustering with DMDBSCAN method")
     time_start = time.time()
 
     clustering.dbscan_clustering(data_for_clustering, "initial data")
     data_for_clustering = data_for_clustering.drop(columns='cluster')
 
     time_end = (time.time() - time_start) / 60
-    print("\t   Images folder: plots/clustering/initial data/DBSCAN/")
+    print("\t   Images folder: plots/clustering/initial data/"
+          "DBSCAN with DMDBSCAN/")
     print("\t   Done. With time " + str(time_end) + " min")
 
     # Clustering using OPTICS algorithm
@@ -232,7 +233,7 @@ def embedded_data_clustering(data_for_clustering, customer_ids, name):
     print("\t   Done. With time " + str(time_end) + " min")
 
     # Clustering using DBSCAN algorithm
-    print("\t1. DBSCAN clustering")
+    print("\t1. DBSCAN clustering with DMDBSCAN method")
     time_start = time.time()
 
     clustering.dbscan_clustering(data_for_clustering, name,
@@ -240,7 +241,8 @@ def embedded_data_clustering(data_for_clustering, customer_ids, name):
     data_for_clustering = data_for_clustering.drop(columns='cluster')
 
     time_end = (time.time() - time_start) / 60
-    print("\t   Images folder: plots/clustering/" + name + "/DBSCAN/")
+    print("\t   Images folder: plots/clustering/" + name +
+          "/DBSCAN with DMDBSCAN/")
     print("\t   Done. With time " + str(time_end) + " min")
 
     # Clustering using OPTICS algorithm

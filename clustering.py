@@ -145,18 +145,19 @@ def dbscan_clustering(data, name,
         sklearn.cluster.DBSCAN(
             min_samples=round(math.log(len(learning_data.index))),
             eps=dmdbscan_algorithm(learning_data,
-                                   "clustering/" + name + "/DBSCAN"),
+                                   "clustering/" + name +
+                                   "/DBSCAN with DMDBSCAN"),
             n_jobs=-1).fit(learning_data)
 
     # Plot clusters over auxiliary data
     if auxiliary_data is not None:
         plotting.data_plotting(auxiliary_data, "Auxiliary data clustering",
-                               "clustering/" + name + "/DBSCAN",
+                               "clustering/" + name + "/DBSCAN with DMDBSCAN",
                                color=dbscan_model.labels_)
 
     # Plot clusters over data
     plotting.data_plotting(data, "DBSCAN clustering",
-                           "clustering/" + name + "/DBSCAN",
+                           "clustering/" + name + "/DBSCAN with DMDBSCAN",
                            color=dbscan_model.labels_)
 
     data['cluster'] = dbscan_model.labels_
@@ -171,7 +172,8 @@ def dbscan_clustering(data, name,
                               ["Category", "Mean spendings"],
                               "Cluster " + str(i) + " (" +
                               str(len(cluster_data.index)) + " customers)",
-                              "clustering/" + name + "/DBSCAN/clusters")
+                              "clustering/" + name +
+                              "/DBSCAN with DMDBSCAN/clusters")
 
     return
 
